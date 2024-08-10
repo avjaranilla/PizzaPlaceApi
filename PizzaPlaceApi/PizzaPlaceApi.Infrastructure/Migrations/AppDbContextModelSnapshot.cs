@@ -81,7 +81,8 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("price");
 
-                    b.Property<char>("Size")
+                    b.Property<string>("Size")
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("size");
 

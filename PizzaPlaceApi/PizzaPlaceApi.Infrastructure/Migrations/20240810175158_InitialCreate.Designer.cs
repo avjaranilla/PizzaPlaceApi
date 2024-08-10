@@ -11,7 +11,7 @@ using PizzaPlaceApi.Infrastructure.Data;
 namespace PizzaPlaceApi.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240810164720_InitialCreate")]
+    [Migration("20240810175158_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -84,7 +84,8 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("price");
 
-                    b.Property<char>("Size")
+                    b.Property<string>("Size")
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("size");
 

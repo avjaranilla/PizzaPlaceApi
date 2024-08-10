@@ -45,7 +45,7 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
                 {
                     pizza_id = table.Column<string>(type: "TEXT", nullable: false),
                     pizza_type_id = table.Column<string>(type: "TEXT", nullable: false),
-                    size = table.Column<char>(type: "TEXT", nullable: false),
+                    size = table.Column<string>(type: "TEXT", nullable: false),
                     price = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>

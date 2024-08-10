@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "kSnk/2rBej8=",
+  "dgSpecHash": "ogS6N1NJoK8=",
   "success": true,
   "projectFilePath": "C:\\Users\\Windows\\Desktop\\CodeChallenge\\PizzaPlaceApi\\PizzaPlaceApi\\PizzaPlaceApi.Application\\PizzaPlaceApi.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Windows\\.nuget\\packages\\csvhelper\\33.0.1\\csvhelper.33.0.1.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.0-preview.6.24327.4\\microsoft.data.sqlite.core.9.0.0-preview.6.24327.4.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0-preview.6.24327.4\\microsoft.entityframeworkcore.9.0.0-preview.6.24327.4.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0-preview.6.24327.4\\microsoft.entityframeworkcore.abstractions.9.0.0-preview.6.24327.4.nupkg.sha512",

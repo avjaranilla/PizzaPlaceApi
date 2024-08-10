@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using PizzaPlaceApi.Application.Interfraces;
+using PizzaPlaceApi.Application.Services;
 using PizzaPlaceApi.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<ICsvImportService, CsvImportService>();
 
 
 // Configure DbContext for SQLite
