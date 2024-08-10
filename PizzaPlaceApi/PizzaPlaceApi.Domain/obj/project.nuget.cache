@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I+2EDGxeyqsUtnuTZMNY0K03iln4+BdJi4yZ4Xf65PXq0O4aAUTHKcBg3aYOMkQU6q77+YlEdJr0xOEdyVjRCw==",
+  "dgSpecHash": "CkZr0cTBfhw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Windows\\Desktop\\CodeChallenge\\PizzaPlaceApi\\PizzaPlaceApi.Domain\\PizzaPlaceApi.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Windows\\Desktop\\CodeChallenge\\PizzaPlaceApi\\PizzaPlaceApi\\PizzaPlaceApi.Domain\\PizzaPlaceApi.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
