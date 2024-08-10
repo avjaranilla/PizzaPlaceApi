@@ -14,7 +14,7 @@ namespace PizzaPlaceApi.Domain.Entities
         public int Quantity { get; set; }
 
         //Navigation Property
-        public Orders Order { get; set; }
+        public Order Order { get; set; }
         public Pizza Pizza { get; set; }    
     }
 }

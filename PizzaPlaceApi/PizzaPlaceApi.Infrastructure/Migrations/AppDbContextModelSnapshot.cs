@@ -17,21 +17,45 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0-preview.6.24327.4");
 
+            modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("order_id");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("date");
+
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("time");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("orders", (string)null);
+                });
+
             modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.OrderDetails", b =>
                 {
                     b.Property<int>("OrderDetailsId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("order_details_id");
 
                     b.Property<int>("OrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("order_id");
 
                     b.Property<string>("PizzaId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("pizza_id");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("quantity");
 
                     b.HasKey("OrderDetailsId");
 
@@ -39,73 +63,64 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
 
                     b.HasIndex("PizzaId");
 
-                    b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.Orders", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<TimeOnly>("Time")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
+                    b.ToTable("order_details", (string)null);
                 });
 
             modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.Pizza", b =>
                 {
                     b.Property<string>("PizzaId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("pizza_id");
 
                     b.Property<string>("PizzaTypeId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("pizza_type_id");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("price");
 
                     b.Property<char>("Size")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("size");
 
                     b.HasKey("PizzaId");
 
                     b.HasIndex("PizzaTypeId");
 
-                    b.ToTable("Pizzas");
+                    b.ToTable("pizzas", (string)null);
                 });
 
             modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.PizzaType", b =>
                 {
                     b.Property<string>("PizzaTypeId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("pizza_type_id");
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("category");
 
                     b.Property<string>("Ingredients")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("ingredients");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("name");
 
                     b.HasKey("PizzaTypeId");
 
-                    b.ToTable("PizzaTypes");
+                    b.ToTable("pizza_types", (string)null);
                 });
 
             modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.OrderDetails", b =>
                 {
-                    b.HasOne("PizzaPlaceApi.Domain.Entities.Orders", "Order")
+                    b.HasOne("PizzaPlaceApi.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -133,7 +148,7 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
                     b.Navigation("PizzaType");
                 });
 
-            modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.Orders", b =>
+            modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.Order", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
