@@ -12,8 +12,5 @@ namespace PizzaPlaceApi.Domain.Entities
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }
 
-
-        //Navigation Property
-        public ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

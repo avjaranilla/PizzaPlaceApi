@@ -1,6 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
-using PizzaPlaceApi.Application.Interfraces;
+using PizzaPlaceApi.Application.Interfaces;
 using PizzaPlaceApi.Application.Mapping;
 using PizzaPlaceApi.Domain.Entities;
 using PizzaPlaceApi.Infrastructure.Data;

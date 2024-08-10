@@ -13,9 +13,5 @@ namespace PizzaPlaceApi.Domain.Entities
         public string Category { get; set; }
         public string Ingredients { get; set; }
 
-
-        //Navigation Property
-        public ICollection<Pizza> Pizzas { get; set; }
-
     }
 }

@@ -1,22 +1,77 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzaPlaceApi.Application.Interfraces;
+using PizzaPlaceApi.Application.Interfaces;
+using PizzaPlaceApi.Domain.Entities;
 
 namespace PizzaPlaceApi.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class PizzaTypeController : Controller
     {
-        private readonly ICsvImportService _csvImportService;
+        private readonly IPizzaTypeService _pizzaTypeService;
 
-        public PizzaTypeController(ICsvImportService csvImportService)
+        public PizzaTypeController(IPizzaTypeService pizzaTypeService)
         {
-            _csvImportService = csvImportService;
+            _pizzaTypeService = pizzaTypeService;
         }
 
-        //[HttpPost("import-pizzatype")]
-        //public async Task<IActionResult> ImportPizzaType([FromForm] string filePath)
-        //{
-        //    await _csvImportService.ImportPizzaTypeDataAsync(filePath);
-        //    return Ok("Pizza types data imported successfully.");
-        //}
+
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PizzaType>>> GetPizzaTypes()
+        {
+            var pizzaTypes = await _pizzaTypeService.GetAllPizzaTypesAsync();
+            return Ok(pizzaTypes);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PizzaType>> GetPizzaType(string id)
+        {
+            var pizzaType = await _pizzaTypeService.GetPizzaTypeByIdAsync(id);
+
+            if (pizzaType == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pizzaType);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<PizzaType>> CreatePizzaType(PizzaType pizzaType)
+        {
+            // Initialize the PizzaType object
+            if (pizzaType == null)
+            {
+                return BadRequest();
+            }
+
+            // Add the new PizzaType to the database
+            await _pizzaTypeService.AddPizzaTypeAsync(pizzaType);
+            return CreatedAtAction(nameof(GetPizzaType), new { id = pizzaType.PizzaTypeId }, pizzaType);
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePizzaType(string id, PizzaType pizzaType)
+        {
+            if (id != pizzaType.PizzaTypeId)
+            {
+                return BadRequest();
+            }
+
+            await _pizzaTypeService.UpdatePizzaTypeAsync(pizzaType);
+            return NoContent();
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePizzaType(string id)
+        {
+            await _pizzaTypeService.DeletePizzaTypeAsync(id);
+            return NoContent();
+        }
+
+
     }
 }

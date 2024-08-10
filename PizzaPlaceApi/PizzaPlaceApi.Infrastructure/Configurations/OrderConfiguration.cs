@@ -22,11 +22,6 @@ namespace PizzaPlaceApi.Infrastructure.Configurations
 
             builder.HasKey(o => o.OrderId);
 
-            // Update the relationship to match expected types
-            builder.HasMany(o => o.OrderDetails)
-                .WithOne(od => od.Order)
-                .HasForeignKey(od => od.OrderId)
-                .IsRequired();  // Make the foreign key required
         }
     }
 }

@@ -23,13 +23,13 @@ namespace PizzaPlaceApi.Infrastructure.Configurations
 
             builder.HasKey(od => od.OrderDetailsId);
 
-            builder.HasOne(od => od.Order)
-                .WithMany(o => o.OrderDetails)
+            builder.HasOne<Order>()  
+                .WithMany()  
                 .HasForeignKey(od => od.OrderId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);  // Keep the cascade delete behavior
 
-            builder.HasOne(od => od.Pizza)
-                .WithMany()
+            builder.HasOne<Pizza>()  
+                .WithMany()  
                 .HasForeignKey(od => od.PizzaId);
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PizzaPlaceApi.Application.Interfraces
+namespace PizzaPlaceApi.Application.Interfaces
 {
     public interface ICsvImportService
     {

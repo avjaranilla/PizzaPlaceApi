@@ -12,9 +12,5 @@ namespace PizzaPlaceApi.Domain.Entities
         public string PizzaTypeId { get; set; }
         public string Size { get; set; }
         public decimal Price { get; set; }
-
-
-        //Navigation Property
-        public PizzaType PizzaType { get; set; }
     }
 }

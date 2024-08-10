@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzaPlaceApi.Application.Interfraces;
+using PizzaPlaceApi.Application.Interfaces;
 
 namespace PizzaPlaceApi.Api.Controllers
 {

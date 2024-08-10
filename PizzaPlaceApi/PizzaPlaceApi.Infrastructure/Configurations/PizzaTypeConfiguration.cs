@@ -22,9 +22,7 @@ namespace PizzaPlaceApi.Infrastructure.Configurations
             builder.Property(pt => pt.Ingredients).HasColumnName("ingredients");
 
             builder.HasKey(pt => pt.PizzaTypeId);
-            builder.HasMany(pt => pt.Pizzas)
-                .WithOne(p => p.PizzaType)
-                .HasForeignKey(p => p.PizzaTypeId);
+
         }
 
     }

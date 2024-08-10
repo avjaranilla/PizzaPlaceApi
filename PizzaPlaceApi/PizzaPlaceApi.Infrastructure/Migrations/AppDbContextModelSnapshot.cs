@@ -73,7 +73,6 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
                         .HasColumnName("pizza_id");
 
                     b.Property<string>("PizzaTypeId")
-                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("pizza_type_id");
 
@@ -121,42 +120,24 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
 
             modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.OrderDetails", b =>
                 {
-                    b.HasOne("PizzaPlaceApi.Domain.Entities.Order", "Order")
-                        .WithMany("OrderDetails")
+                    b.HasOne("PizzaPlaceApi.Domain.Entities.Order", null)
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PizzaPlaceApi.Domain.Entities.Pizza", "Pizza")
+                    b.HasOne("PizzaPlaceApi.Domain.Entities.Pizza", null)
                         .WithMany()
                         .HasForeignKey("PizzaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Pizza");
                 });
 
             modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.Pizza", b =>
                 {
-                    b.HasOne("PizzaPlaceApi.Domain.Entities.PizzaType", "PizzaType")
-                        .WithMany("Pizzas")
-                        .HasForeignKey("PizzaTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PizzaType");
-                });
-
-            modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("PizzaPlaceApi.Domain.Entities.PizzaType", b =>
-                {
-                    b.Navigation("Pizzas");
+                    b.HasOne("PizzaPlaceApi.Domain.Entities.PizzaType", null)
+                        .WithMany()
+                        .HasForeignKey("PizzaTypeId");
                 });
 #pragma warning restore 612, 618
         }

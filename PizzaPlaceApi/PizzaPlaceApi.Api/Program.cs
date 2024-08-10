@@ -1,12 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using PizzaPlaceApi.Application.Interfraces;
+using PizzaPlaceApi.Application.Interfaces;
 using PizzaPlaceApi.Application.Services;
+using PizzaPlaceApi.Domain.Repositories;
 using PizzaPlaceApi.Infrastructure.Data;
+using PizzaPlaceApi.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ICsvImportService, CsvImportService>();
+builder.Services.AddScoped<IPizzaTypeService, PizzaTypeService>();
+builder.Services.AddScoped<IPizzaTypeRepository, PizzaTypeRepository>();
+builder.Services.AddScoped<IPizzaService, PizzaService>();
+builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
 
 
 // Configure DbContext for SQLite

@@ -22,9 +22,11 @@ namespace PizzaPlaceApi.Infrastructure.Configurations
             builder.Property(p => p.Price).HasColumnName("price");
 
             builder.HasKey(p => p.PizzaId);
-            builder.HasOne(p => p.PizzaType)
-                .WithMany(pt => pt.Pizzas)
-                .HasForeignKey(p => p.PizzaTypeId);
+            builder.HasOne<PizzaType>()
+                 .WithMany()  
+                 .HasForeignKey(p => p.PizzaTypeId)
+                 .IsRequired(false);  // Optional foreign key
+
         }
     }
 }

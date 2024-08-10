@@ -44,7 +44,7 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     pizza_id = table.Column<string>(type: "TEXT", nullable: false),
-                    pizza_type_id = table.Column<string>(type: "TEXT", nullable: false),
+                    pizza_type_id = table.Column<string>(type: "TEXT", nullable: true),
                     size = table.Column<string>(type: "TEXT", nullable: false),
                     price = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
@@ -55,8 +55,7 @@ namespace PizzaPlaceApi.Infrastructure.Migrations
                         name: "FK_pizzas_pizza_types_pizza_type_id",
                         column: x => x.pizza_type_id,
                         principalTable: "pizza_types",
-                        principalColumn: "pizza_type_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "pizza_type_id");
                 });
 
             migrationBuilder.CreateTable(
