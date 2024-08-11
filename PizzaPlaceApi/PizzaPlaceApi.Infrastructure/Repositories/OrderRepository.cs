@@ -100,5 +100,36 @@ namespace PizzaPlaceApi.Infrastructure.Repositories
 
 
         }
+
+        public async Task UpdateOrderAsync(Order order)
+        {
+            _context.Orders.Update(order);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveOrderDetailsAsync(OrderDetails orderDetails)
+        {
+            _context.OrderDetails.RemoveRange(orderDetails);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddOrderDetailsAsync(OrderDetails orderDetails)
+        {
+            await _context.OrderDetails.AddRangeAsync(orderDetails);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<OrderDetails>> GetOrderDetailsByOrderIdAsync(int orderId)
+        {
+            return await _context.OrderDetails
+                .Where(od => od.OrderId == orderId)
+                .ToListAsync();
+        }
+
+        public async Task UpdateOrderDetailsAsync(OrderDetails orderDetails)
+        {
+            _context.OrderDetails.Update(orderDetails);
+            await _context.SaveChangesAsync();
+        }
     }
 }

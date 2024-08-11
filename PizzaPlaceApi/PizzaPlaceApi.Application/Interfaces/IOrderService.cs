@@ -13,5 +13,6 @@ namespace PizzaPlaceApi.Application.Interfaces
         Task<IEnumerable<OrderDTO>> GetAllOrdersAsync(int pageNumber, int pageSize);
         Task<OrderDTO> GetOrderByIdAsync(int orderId);
         Task CreateOrderAsync(CreateOrderDTO createOrderDto);
+        Task<OrderDTO> UpdateOrderAsync(UpdateOrderDTO updateOrderDto);
     }
 }

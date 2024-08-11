@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace PizzaPlaceApi.Domain.DTOs
 {
-    public class OrderDTO
+    public class UpdateOrderDTO
     {
         public int OrderId { get; set; }
-        public DateOnly Date { get; set; }
-        public TimeOnly Time { get; set; }
-        public IEnumerable<OrderDetailsDTO> OrderDetails { get; set; }
+        public DateTime OrderDateTime { get; set; }  // Combined Date and Time
+        public List<UpdateOrderDetailsDTO> OrderDetails { get; set; }
     }
 }

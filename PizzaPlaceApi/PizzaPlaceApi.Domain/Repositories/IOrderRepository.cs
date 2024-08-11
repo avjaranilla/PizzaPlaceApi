@@ -15,5 +15,16 @@ namespace PizzaPlaceApi.Domain.Repositories
 
         Task CreateOrderAsync(Order order);
         Task CreateOrderDetailsAsync(List<OrderDetails> orderDetails);
+        
+        
+        Task UpdateOrderAsync(Order order);
+        Task RemoveOrderDetailsAsync(OrderDetails orderDetails);
+        Task AddOrderDetailsAsync(OrderDetails orderDetails);
+        Task UpdateOrderDetailsAsync (OrderDetails orderDetails);
+
+
+        // Optionally, if you need methods for getting details by order ID
+        Task<IEnumerable<OrderDetails>> GetOrderDetailsByOrderIdAsync(int orderId);
+
     }
 }
