@@ -131,5 +131,36 @@ namespace PizzaPlaceApi.Infrastructure.Repositories
             _context.OrderDetails.Update(orderDetails);
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteOrderByIdAsync(int orderId)
+        {
+            // Fetch the order details associated with the order
+            var orderDetails = await _context.OrderDetails
+                .Where(od => od.OrderId == orderId)
+                .ToListAsync();
+
+            if (orderDetails.Any())
+            {
+                // Remove all the order details for the order
+                _context.OrderDetails.RemoveRange(orderDetails);
+            }
+
+            // Fetch the order itself
+            var order = await _context.Orders
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order != null)
+            {
+                // Remove the order
+                _context.Orders.Remove(order);
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException($"Order with ID {orderId} not found.");
+            }
+        }
     }
 }

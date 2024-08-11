@@ -172,5 +172,9 @@ namespace PizzaPlaceApi.Application.Services
             };
         }
 
+        public async Task DeleteOrderByIdAsync(int orderId)
+        {
+            await _orderRepository.DeleteOrderByIdAsync(orderId);
+        }
     }
 }

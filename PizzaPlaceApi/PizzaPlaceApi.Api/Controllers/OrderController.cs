@@ -103,6 +103,24 @@ namespace PizzaPlaceApi.Api.Controllers
             }
         }
 
+        [HttpDelete("{orderId}")]
+        public async Task<IActionResult> DeleteOrder(int orderId)
+        {
+            try
+            {
+                await _orderService.DeleteOrderByIdAsync(orderId);
+                return NoContent(); // Return 204 No Content on successful deletion
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(new { message = ex.Message }); // Return 404 if the order is not found
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message }); // Return 500 for any other errors
+            }
+        }
+
 
     }
 }

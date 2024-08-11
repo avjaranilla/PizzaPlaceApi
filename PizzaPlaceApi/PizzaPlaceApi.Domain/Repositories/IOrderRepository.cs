@@ -26,5 +26,7 @@ namespace PizzaPlaceApi.Domain.Repositories
         // Optionally, if you need methods for getting details by order ID
         Task<IEnumerable<OrderDetails>> GetOrderDetailsByOrderIdAsync(int orderId);
 
+        Task DeleteOrderByIdAsync(int orderId);
+
     }
 }
