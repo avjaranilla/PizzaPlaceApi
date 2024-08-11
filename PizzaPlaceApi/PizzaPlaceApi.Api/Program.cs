@@ -13,6 +13,9 @@ builder.Services.AddScoped<IPizzaTypeService, PizzaTypeService>();
 builder.Services.AddScoped<IPizzaTypeRepository, PizzaTypeRepository>();
 builder.Services.AddScoped<IPizzaService, PizzaService>();
 builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
 
 
 // Configure DbContext for SQLite

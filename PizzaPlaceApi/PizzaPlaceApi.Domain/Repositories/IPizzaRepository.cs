@@ -14,5 +14,7 @@ namespace PizzaPlaceApi.Domain.Repositories
         Task AddAsync(Pizza pizza);
         Task UpdateAsync(Pizza pizza);
         Task DeleteAsync(string id);
+
+        Task<List<Pizza>> GetPizzasByIdsAsync(List<string> pizzaIds);
     }
 }
