@@ -9,12 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ICsvImportService, CsvImportService>();
+
 builder.Services.AddScoped<IPizzaTypeService, PizzaTypeService>();
 builder.Services.AddScoped<IPizzaTypeRepository, PizzaTypeRepository>();
+
 builder.Services.AddScoped<IPizzaService, PizzaService>();
 builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
+
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
 
 
