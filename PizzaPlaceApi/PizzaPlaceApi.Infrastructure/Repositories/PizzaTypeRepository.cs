@@ -50,5 +50,12 @@ namespace PizzaPlaceApi.Infrastructure.Repositories
             _context.PizzaTypes.Update(pizzaType);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<PizzaType>> GetPizzaTypesByIdAsync(List<string> pizzaTypeIds)
+        {
+            return await _context.PizzaTypes
+           .Where(p => pizzaTypeIds.Contains(p.PizzaTypeId))
+           .ToListAsync();
+        }
     }
 }

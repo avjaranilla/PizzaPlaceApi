@@ -22,32 +22,43 @@ namespace PizzaPlaceApi.Application.Services
             _context = context;
         }
 
-        public async Task ImportOrderDetailsDataAsync(string csvFilePath)
+        public async Task<int> ImportOrderDetailsDataAsync(string csvFilePath)
         {
             var orderDetails = ReadCsvFile<OrderDetails>(csvFilePath);
             _context.OrderDetails.AddRange(orderDetails);
-            await _context.SaveChangesAsync();
+            var count = await _context.SaveChangesAsync();
+            return count;
         }
 
-        public async Task ImportOrdersDataAsync(string csvFilePath)
+        public async Task<int> ImportOrdersDataAsync(string csvFilePath)
         {
             var orders = ReadCsvFile<Order>(csvFilePath);
             _context.Orders.AddRange(orders);
-            await _context.SaveChangesAsync();
+            var count = await _context.SaveChangesAsync();
+            return count;
         }
 
-        public async Task ImportPizzaDataAsync(string csvFilePath)
+        public async Task<int> ImportPizzaDataAsync(string csvFilePath)
         {
+            // Read the pizzas from the CSV file
             var pizzas = ReadCsvFile<Pizza>(csvFilePath);
+
+            // Add the pizzas to the context
             _context.Pizzas.AddRange(pizzas);
-            await _context.SaveChangesAsync();
+
+            // Save changes to the database
+            var count = await _context.SaveChangesAsync();
+
+            // Return the number of pizzas added
+            return count;
         }
 
-        public async Task ImportPizzaTypeDataAsync(string csvFilePath)
+        public async Task<int> ImportPizzaTypeDataAsync(string csvFilePath)
         {
             var pizzaTypes = ReadCsvFile<PizzaType>(csvFilePath);
             _context.PizzaTypes.AddRange(pizzaTypes);
-            await _context.SaveChangesAsync();
+            var count = await _context.SaveChangesAsync();
+            return count;
         }
 
         private IEnumerable<T> ReadCsvFile<T>(string filePath) where T : class

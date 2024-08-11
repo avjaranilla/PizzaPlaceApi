@@ -8,9 +8,9 @@ namespace PizzaPlaceApi.Application.Interfaces
 {
     public interface ICsvImportService
     {
-        Task ImportPizzaDataAsync(string csvFilePath);
-        Task ImportPizzaTypeDataAsync(string csvFilePath);
-        Task ImportOrdersDataAsync(string csvFilePath);
-        Task ImportOrderDetailsDataAsync(string csvFilePath);
+        Task<int> ImportPizzaDataAsync(string csvFilePath);
+        Task<int> ImportPizzaTypeDataAsync(string csvFilePath);
+        Task<int> ImportOrdersDataAsync(string csvFilePath);
+        Task<int> ImportOrderDetailsDataAsync(string csvFilePath);
     }
 }

@@ -2,6 +2,7 @@
 using PizzaPlaceApi.Domain.DTOs;
 using PizzaPlaceApi.Domain.Entities;
 using PizzaPlaceApi.Domain.Repositories;
+using PizzaPlaceApi.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,17 @@ namespace PizzaPlaceApi.Application.Services
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IPizzaRepository _pizzaRepository;
+        private readonly IPizzaTypeRepository _pizzaTypeRepository;
 
-        public OrderService(IOrderRepository orderRepository, IPizzaRepository pizzaRepository)
+
+        public OrderService(IOrderRepository orderRepository, IPizzaRepository pizzaRepository, IPizzaTypeRepository pizzaTypeRepository)
         {
             _orderRepository = orderRepository;
             _pizzaRepository = pizzaRepository;
+            _pizzaTypeRepository = pizzaTypeRepository;
         }
 
-        public async Task CreateOrderAsync(CreateOrderDTO createOrderDto)
+        public async Task<OrderDTO> CreateOrderAsync(CreateOrderDTO createOrderDto)
         {
             // Validate PizzaIds
             var pizzaIds = createOrderDto.OrderDetails.Select(od => od.PizzaId).Distinct().ToList();
@@ -32,6 +36,9 @@ namespace PizzaPlaceApi.Application.Services
             {
                 throw new ArgumentException("One or more PizzaIds are invalid.");
             }
+
+            // Retrieve related data for mapping
+            var pizzaTypes = await _pizzaTypeRepository.GetAllAsync(); // Fetch all pizza types
 
             // Create Order entity
             var order = new Order
@@ -43,7 +50,7 @@ namespace PizzaPlaceApi.Application.Services
             // Create OrderDetails entities
             var orderDetails = createOrderDto.OrderDetails.Select(od => new OrderDetails
             {
-                OrderId = order.OrderId, // Initially set to zero, will be set after order creation
+                // Initially set OrderId to zero, will be set after order creation
                 PizzaId = od.PizzaId,
                 Quantity = od.Quantity
             }).ToList();
@@ -59,6 +66,35 @@ namespace PizzaPlaceApi.Application.Services
 
             // Save OrderDetails
             await _orderRepository.CreateOrderDetailsAsync(orderDetails);
+
+            // Map to OrderDTO with correct pizza names and sizes
+            var orderDto = new OrderDTO
+            {
+                OrderId = order.OrderId,
+                Date = order.Date,
+                Time = order.Time,
+                OrderDetails = orderDetails.Select(od =>
+                {
+                    // Find pizza type name
+                    var pizzaTypeId = validPizzas.FirstOrDefault(p => p.PizzaId == od.PizzaId)?.PizzaTypeId;
+                    var pizzaName = pizzaTypes.FirstOrDefault(pt => pt.PizzaTypeId == pizzaTypeId)?.Name;
+
+                    // Find pizza size
+                    var pizzaSize = validPizzas.FirstOrDefault(p => p.PizzaId == od.PizzaId)?.Size;
+
+                    return new OrderDetailsDTO
+                    {
+                        OrderDetailsId = od.OrderDetailsId,
+                        OrderId = od.OrderId,
+                        PizzaId = od.PizzaId,
+                        Quantity = od.Quantity,
+                        PizzaName = pizzaName,
+                        PizzaSize = pizzaSize
+                    };
+                }).ToList()
+            };
+
+            return orderDto;
         }
 
         public async Task<IEnumerable<OrderDTO>> GetAllOrdersAsync(int pageNumber, int pageSize)

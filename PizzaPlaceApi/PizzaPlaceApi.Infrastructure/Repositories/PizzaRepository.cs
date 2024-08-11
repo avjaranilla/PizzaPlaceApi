@@ -55,7 +55,7 @@ namespace PizzaPlaceApi.Infrastructure.Repositories
         public async Task UpdateAsync(Pizza pizza)
         {
             _context.Pizzas.Update(pizza);
-            await _context.SaveChangesAsync();
+           await _context.SaveChangesAsync();
         }
     }
 }

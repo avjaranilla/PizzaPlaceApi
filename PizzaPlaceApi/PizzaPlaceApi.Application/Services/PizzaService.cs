@@ -39,9 +39,24 @@ namespace PizzaPlaceApi.Application.Services
             return await _pizzaRepository.GetByIdAsync(id);    
         }
 
-        public async Task UpdatePizzaAsync(Pizza pizza)
+        public async Task<Pizza> UpdatePizzaAsync(Pizza pizza)
         {
-            await _pizzaRepository.UpdateAsync(pizza);
+            var existingPizza = await _pizzaRepository.GetByIdAsync(pizza.PizzaId);
+
+            if (existingPizza == null)
+            {
+                throw new Exception($"{pizza.PizzaId} Not Found.");
+            }
+
+            // Update the pizza properties
+            existingPizza.Size = pizza.Size;
+            existingPizza.Price = pizza.Price;
+            existingPizza.PizzaTypeId = pizza.PizzaTypeId;
+
+
+            await _pizzaRepository.UpdateAsync(existingPizza);
+
+            return existingPizza; // Return the updated pizza
         }
     }
 }

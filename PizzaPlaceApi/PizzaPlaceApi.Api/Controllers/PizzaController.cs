@@ -69,11 +69,20 @@ namespace PizzaPlaceApi.Api.Controllers
         {
             if (id != pizza.PizzaId)
             {
-                return BadRequest();
+                return BadRequest("The provided ID does not match the pizza ID.");
             }
 
-            await _pizzaService.UpdatePizzaAsync(pizza);
-            return NoContent();
+            // Call the service to update the pizza
+            var updatedPizza = await _pizzaService.UpdatePizzaAsync(pizza);
+
+            // Check if the update was successful
+            if (updatedPizza == null)
+            {
+                return NotFound("Pizza not found.");
+            }
+
+            // Return the updated pizza details
+            return Ok(updatedPizza);
         }
 
         [HttpDelete("{id}")]

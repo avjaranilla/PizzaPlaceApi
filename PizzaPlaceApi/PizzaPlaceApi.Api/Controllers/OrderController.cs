@@ -47,8 +47,8 @@ namespace PizzaPlaceApi.Api.Controllers
 
             try
             {
-                await _orderService.CreateOrderAsync(createOrderDto);
-                return Ok("Order created successfully.");
+                var createdOrder = await _orderService.CreateOrderAsync(createOrderDto);
+                return CreatedAtAction(nameof(CreateOrder), new { id = createdOrder.OrderId }, createdOrder);
             }
             catch (Exception ex)
             {

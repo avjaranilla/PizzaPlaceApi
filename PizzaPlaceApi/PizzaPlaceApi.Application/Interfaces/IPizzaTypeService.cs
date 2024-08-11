@@ -12,7 +12,7 @@ namespace PizzaPlaceApi.Application.Interfaces
         Task<IEnumerable<PizzaType>> GetAllPizzaTypesAsync();
         Task<PizzaType> GetPizzaTypeByIdAsync(string id);
         Task AddPizzaTypeAsync(PizzaType pizzaType);
-        Task UpdatePizzaTypeAsync(PizzaType pizzaType);
+        Task<PizzaType> UpdatePizzaTypeAsync(PizzaType pizzaType);
         Task DeletePizzaTypeAsync(string id);
     }
 }

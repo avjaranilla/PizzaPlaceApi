@@ -1,6 +1,7 @@
 ﻿using PizzaPlaceApi.Application.Interfaces;
 using PizzaPlaceApi.Domain.Entities;
 using PizzaPlaceApi.Domain.Repositories;
+using PizzaPlaceApi.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,25 @@ namespace PizzaPlaceApi.Application.Services
             return await _pizzaTypeRepository.GetByIdAsync(id);
         }
 
-        public async Task UpdatePizzaTypeAsync(PizzaType pizzaType)
+        public async Task<PizzaType> UpdatePizzaTypeAsync(PizzaType pizzaType)
         {
-            await _pizzaTypeRepository.UpdateAsync(pizzaType);
+             // Fetch the existing pizza type from the repository
+            var existingPizzaType = await _pizzaTypeRepository.GetByIdAsync(pizzaType.PizzaTypeId);
+
+            if (existingPizzaType == null)
+            {
+                throw new Exception($"{pizzaType.PizzaTypeId} Not Found.");
+            }
+
+            // Update the existing entity's properties
+            existingPizzaType.Category = pizzaType.Category;
+            existingPizzaType.Ingredients = pizzaType.Ingredients;
+            existingPizzaType.Name = pizzaType.Name;
+
+            // Update the entity in the repository
+            await _pizzaTypeRepository.UpdateAsync(existingPizzaType);
+
+            return existingPizzaType; // Return the updated pizza type
         }
     }
 }

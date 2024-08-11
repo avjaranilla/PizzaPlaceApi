@@ -60,8 +60,16 @@ namespace PizzaPlaceApi.Api.Controllers
                 return BadRequest();
             }
 
-            await _pizzaTypeService.UpdatePizzaTypeAsync(pizzaType);
-            return NoContent();
+            var updatedPizzaType = await _pizzaTypeService.UpdatePizzaTypeAsync(pizzaType);
+
+            // Check if the update was successful
+            if (updatedPizzaType == null)
+            {
+                return NotFound("Pizza not found.");
+            }
+
+            // Return the updated pizza details
+            return Ok(updatedPizzaType);
         }
 
 
