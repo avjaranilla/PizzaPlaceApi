@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\PizzaPlaceApi.Api.props" />
-</Project>
